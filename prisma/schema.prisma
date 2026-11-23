@@ -1,0 +1,206 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/client"
+}
+
+// ── ADMIN USERS ──────────────────────────────────────────────
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  pinCode   String
+  name      String
+  role      String   @default("ADMIN") // OWNER, ADMIN, RECEPTIONIST
+  isActive  Boolean  @default(true)
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ── SALON PROFILE ─────────────────────────────────────────────
+model Salon {
+  id           String    @id @default(uuid())
+  name         String
+  nameAr       String?
+  slug         String    @unique
+  gender       String    @default("BOTH") // MENS, WOMENS, BOTH
+  logoUrl      String?
+  coverUrl     String?
+  description  String?
+  phone        String?
+  whatsapp     String?
+  address      String?
+  city         String?
+  openTime     String?   // e.g. "09:00"
+  closeTime    String?   // e.g. "22:00"
+  workDays     String?   // "sat,sun,mon,tue,wed,thu" comma-separated
+  isActive     Boolean   @default(true)
+  isFeatured   Boolean   @default(false)
+  rating       Float     @default(0.0)
+  reviewCount  Int       @default(0)
+  sortOrder    Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  services     Service[]
+  staff        StaffMember[]
+  appointments Appointment[]
+  gallery      GalleryImage[]
+  reviews      Review[]
+}
+
+// ── SERVICES ──────────────────────────────────────────────────
+model Service {
+  id           String        @id @default(uuid())
+  salonId      String
+  salon        Salon         @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  name         String
+  nameAr       String?
+  description  String?
+  gender       String        @default("BOTH") // MENS, WOMENS, BOTH
+  duration     Int           // in minutes
+  price        Float
+  discountPrice Float?
+  imageUrl     String?
+  isActive     Boolean       @default(true)
+  isFeatured   Boolean       @default(false)
+  sortOrder    Int           @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointmentItems AppointmentItem[]
+}
+
+// ── STAFF MEMBERS ─────────────────────────────────────────────
+model StaffMember {
+  id           String        @id @default(uuid())
+  salonId      String
+  salon        Salon         @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  name         String
+  nameAr       String?
+  title        String?       // "حلاق", "كوافيرة", "مشرف"
+  gender       String        @default("MALE") // MALE, FEMALE
+  phone        String?
+  avatarUrl    String?
+  bio          String?
+  specialties  String?       // comma-separated: "قص,صبغ,ميش"
+  isActive     Boolean       @default(true)
+  rating       Float         @default(5.0)
+  sortOrder    Int           @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointments AppointmentItem[]
+}
+
+// ── CUSTOMERS ─────────────────────────────────────────────────
+model Customer {
+  id           String        @id @default(uuid())
+  name         String
+  phone        String        @unique
+  email        String?
+  gender       String?       // MALE, FEMALE
+  notes        String?
+  totalVisits  Int           @default(0)
+  totalSpent   Float         @default(0.0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointments Appointment[]
+}
+
+// ── APPOINTMENTS ──────────────────────────────────────────────
+model Appointment {
+  id             String            @id @default(uuid())
+  appointmentNo  String            @unique
+  salonId        String
+  salon          Salon             @relation(fields: [salonId], references: [id])
+  customerId     String?
+  customer       Customer?         @relation(fields: [customerId], references: [id])
+  customerName   String
+  customerPhone  String
+  customerGender String?           // MALE, FEMALE
+  date           String            // "2026-11-25"
+  timeSlot       String            // "14:00"
+  status         String            @default("PENDING") // PENDING, CONFIRMED, IN_PROGRESS, DONE, CANCELLED, NO_SHOW
+  totalPrice     Float             @default(0.0)
+  discount       Float             @default(0.0)
+  finalPrice     Float             @default(0.0)
+  paymentStatus  String            @default("UNPAID") // UNPAID, PAID, PARTIAL
+  paymentMethod  String?           // CASH, INSTAPAY, CARD
+  notes          String?
+  source         String            @default("WEBSITE") // WEBSITE, WHATSAPP, WALK_IN, PHONE
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  items          AppointmentItem[]
+}
+
+model AppointmentItem {
+  id            String       @id @default(uuid())
+  appointmentId String
+  appointment   Appointment  @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  serviceId     String?
+  service       Service?     @relation(fields: [serviceId], references: [id])
+  staffId       String?
+  staff         StaffMember? @relation(fields: [staffId], references: [id])
+  serviceName   String
+  staffName     String?
+  price         Float
+  duration      Int          @default(30)
+}
+
+// ── GALLERY ───────────────────────────────────────────────────
+model GalleryImage {
+  id        String   @id @default(uuid())
+  salonId   String
+  salon     Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  url       String
+  caption   String?
+  gender    String   @default("BOTH") // MENS, WOMENS, BOTH
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+// ── REVIEWS ───────────────────────────────────────────────────
+model Review {
+  id           String   @id @default(uuid())
+  salonId      String
+  salon        Salon    @relation(fields: [salonId], references: [id], onDelete: Cascade)
+  customerName String
+  rating       Int      @default(5)
+  comment      String
+  gender       String?  // MALE, FEMALE
+  isApproved   Boolean  @default(true)
+  createdAt    DateTime @default(now())
+}
+
+// ── OTP TOKENS ────────────────────────────────────────────────
+model OtpToken {
+  id        String   @id @default(uuid())
+  email     String
+  otp       String
+  purpose   String   @default("LOGIN") // LOGIN, BOOKING_CONFIRM
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// ── TREASURY ─────────────────────────────────────────────────
+model TreasuryTransaction {
+  id            String   @id @default(uuid())
+  type          String   // IN, OUT
+  category      String   // APPOINTMENT, EXPENSE, SALARY, OTHER
+  amount        Float
+  description   String
+  reference     String?
+  paymentMethod String   @default("CASH")
+  createdBy     String   @default("system")
+  createdAt     DateTime @default(now())
+}
+
+// ── GLOBAL SETTINGS ───────────────────────────────────────────
+model Setting {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String
+}

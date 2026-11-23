@@ -1,0 +1,38 @@
+{
+  "name": "meraya",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --webpack",
+    "start": "next start",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "seed": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' scripts/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.0.0",
+    "@prisma/client": "^7.0.0",
+    "lucide-react": "^1.16.0",
+    "next": "16.4.3",
+    "nodemailer": "^6.9.16",
+    "otplib": "^12.0.1",
+    "pg": "^8.17.2",
+    "qrcode": "^1.5.4",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/nodemailer": "^6.4.17",
+    "@types/pg": "^8.16.0",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "prisma": "^7.0.0",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}
