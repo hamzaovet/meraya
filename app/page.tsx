@@ -85,7 +85,7 @@ export default function HomePage() {
               <span>كارت المنظومة (3-QR)</span>
             </a>
             <a
-              href="/Install-Meraya.bat"
+              href="/api/desktop-installer"
               download="Install-Meraya.bat"
               className="flex items-center gap-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 border border-gray-200 px-3 py-1.5 text-xs font-bold rounded-xl transition"
             >
@@ -151,7 +151,7 @@ export default function HomePage() {
               </a>
 
               <a
-                href="/Install-Meraya.bat"
+                href="/api/desktop-installer"
                 download="Install-Meraya.bat"
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full flex items-center justify-between p-3 rounded-xl bg-gray-100 text-gray-800 font-bold text-xs"
@@ -291,7 +291,7 @@ export default function HomePage() {
                 <span>تثبيت ع الموبايل (PWA)</span>
               </a>
               <a
-                href="/Install-Meraya.bat"
+                href="/api/desktop-installer"
                 download="Install-Meraya.bat"
                 className="flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white font-extrabold text-xs py-3 px-3 rounded-2xl shadow transition active:scale-95"
               >
