@@ -70,7 +70,7 @@ export default function InstallHelper() {
   };
 
   const handleDownloadBat = () => {
-    window.location.href = "/api/desktop-installer";
+    window.location.href = "/Install-Meraya.bat";
   };
 
   if (isStandalone) {

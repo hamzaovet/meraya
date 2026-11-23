@@ -68,7 +68,7 @@ def generate_card():
     draw.text((W // 2 - w_t // 2, 185), title_text, font=f_title, fill=(15, 118, 110, 255))
     
     # Slogan / Tagline
-    slogan_text = ar("المنظومة السحابية الذكية لصالونات الحلاقة والتجميل (رجالي وحريمي)")
+    slogan_text = ar("منظومة حجز وإدارة صالونات الحلاقة والتجميل (صالون صدام • دقن الباشا • حمام الباشا)")
     bbox_s = draw.textbbox((0, 0), slogan_text, font=f_sub)
     w_s = bbox_s[2] - bbox_s[0]
     draw.text((W // 2 - w_s // 2, 255), slogan_text, font=f_sub, fill=(217, 119, 6, 255))
@@ -103,7 +103,7 @@ def generate_card():
             "title": ar("تثبيت أيقونة الديسكتوب"),
             "desc": ar("تثبيت فوري لأيقونة البرنامج على سطح المكتب"),
             "sub_desc": ar("يفتح بنافذة مستقلة وسريعة مثل البرامج المثبتة"),
-            "url": f"{base_url}/api/desktop-installer",
+            "url": f"{base_url}/Install-Meraya.bat",
             "color": (13, 148, 136), # Vibrant Teal
             "badge": ar("💻 Windows Desktop App")
         }

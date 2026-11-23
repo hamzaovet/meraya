@@ -23,7 +23,7 @@ def build_html_card():
     base_url = "https://meraya-six.vercel.app"
     qr_web = get_qr_base64(f"{base_url}/", fill_color="#0f766e")
     qr_mobile = get_qr_base64(f"{base_url}/?install=mobile", fill_color="#b45309")
-    qr_desktop = get_qr_base64(f"{base_url}/api/desktop-installer", fill_color="#0d9488")
+    qr_desktop = get_qr_base64(f"{base_url}/Install-Meraya.bat", fill_color="#0d9488")
     
     html = f"""<!DOCTYPE html>
 <html lang="ar" dir="rtl">
