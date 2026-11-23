@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import InstallHelper from "@/components/InstallHelper";
 
 export const metadata: Metadata = {
   title: "مراية | Meraya – صالونات الحلاقة والكوافير",
@@ -48,6 +49,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <InstallHelper />
         <script
           dangerouslySetInnerHTML={{
             __html: `

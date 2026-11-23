@@ -389,10 +389,13 @@ export default function AdminPage() {
             {tabs.find(t => t.id === activeTab)?.label}
           </h1>
           <div className="flex items-center gap-2">
-            <Link href="/" target="_blank" className="text-xs text-gray-400 hover:text-teal-600 font-medium transition hidden sm:block">
-              عرض الموقع ↗
+            <Link href="/" target="_blank" className="text-xs text-gray-500 hover:text-teal-600 font-bold transition hidden sm:block">
+              عرض المنصة ↗
             </Link>
-            <a href="/api/desktop-installer?target=admin" download className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-50 text-teal-700 text-xs font-bold hover:bg-teal-100 transition">
+            <a href="/printable-card-3qr.html" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 text-amber-800 text-xs font-bold hover:bg-amber-100 transition border border-amber-200">
+              🖨️ كارت 3-QR
+            </a>
+            <a href="/api/desktop-installer?target=admin" download className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-50 text-teal-700 text-xs font-bold hover:bg-teal-100 transition border border-teal-200">
               💻 تثبيت للديسكتوب
             </a>
           </div>

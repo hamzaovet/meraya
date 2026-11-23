@@ -50,23 +50,41 @@ export default function HomePage() {
       {/* ── TOP NAV ── */}
       <nav className="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl mirror-shimmer flex items-center justify-center">
-              <Scissors size={18} className="text-white" />
+          <Link href="/" className="flex items-center gap-2.5">
+            <img src="/logo.png" alt="مراية" className="w-9 h-9 object-contain rounded-lg" onError={(e) => { (e.target as any).style.display = 'none'; }} />
+            <div className="flex flex-col">
+              <span className="font-black text-xl text-teal-800 leading-none">مراية</span>
+              <span className="text-[10px] text-amber-600 font-bold tracking-wider">MERAYA</span>
             </div>
-            <span className="font-black text-xl text-gray-900">مراية</span>
-            <span className="text-xs text-gray-400 font-medium hidden sm:block">| Meraya</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link href="/mens" className="hidden sm:flex items-center gap-1.5 text-sm font-bold text-gray-700 hover:text-teal-600 transition">
+          </Link>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link href="/mens" className="hidden md:flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gray-700 hover:text-teal-600 transition">
               <Scissors size={15} />
               <span>رجالي</span>
             </Link>
-            <Link href="/womens" className="hidden sm:flex items-center gap-1.5 text-sm font-bold text-gray-700 hover:text-rose-500 transition">
+            <Link href="/womens" className="hidden md:flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gray-700 hover:text-rose-500 transition">
               <Sparkles size={15} />
               <span>حريمي</span>
             </Link>
-            <Link href="/admin" className="btn-teal px-4 py-2 text-xs rounded-xl">
+            
+            <a
+              href="/printable-card-3qr.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 px-3 py-1.5 text-xs font-bold rounded-xl transition"
+            >
+              <span>كارت 3-QR</span>
+            </a>
+
+            <a
+              href="/?install=mobile"
+              className="flex items-center gap-1.5 bg-teal-600 hover:bg-teal-700 text-white px-3.5 py-1.5 text-xs font-black rounded-xl transition shadow-md shadow-teal-600/20"
+            >
+              <span>📱 تثبيت التطبيق</span>
+            </a>
+
+            <Link href="/admin" className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-1.5 text-xs font-bold rounded-xl transition">
               للصالونات
             </Link>
           </div>
@@ -81,13 +99,18 @@ export default function HomePage() {
 
         <div className="max-w-6xl mx-auto px-4 relative z-10">
           <div className="text-center space-y-6 mb-10">
-            {/* Mirror Icon - The Brand Core */}
+            {/* Mirror Logo - The Brand Core */}
             <div className="flex justify-center">
-              <div className="relative">
-                <div className="w-28 h-36 mirror-shimmer rounded-t-full rounded-b-2xl flex items-center justify-center shadow-2xl mx-auto">
-                  <div className="w-20 h-28 bg-white/20 backdrop-blur rounded-t-full rounded-b-xl flex items-center justify-center">
-                    <Scissors size={36} className="text-white" />
-                  </div>
+              <div className="relative group">
+                <div className="w-32 h-32 rounded-3xl bg-white p-2 shadow-2xl mx-auto border-2 border-teal-100 flex items-center justify-center">
+                  <img
+                    src="/logo.png"
+                    alt="شعار مراية"
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      (e.target as any).style.display = 'none';
+                    }}
+                  />
                 </div>
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center shadow-lg">
                   <Sparkles size={14} className="text-white" />
@@ -157,6 +180,41 @@ export default function HomePage() {
                 <div className="absolute bottom-0 inset-x-0 h-1 bg-gradient-to-r from-rose-300 to-pink-100 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </Link>
+          </div>
+
+          {/* ── INSTALLATION & QUICK ACCESS HUB ── */}
+          <div className="max-w-2xl mx-auto mb-12 bg-gradient-to-r from-teal-50 via-white to-amber-50 rounded-3xl p-5 border border-teal-100 shadow-sm text-center">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-teal-500 animate-ping" />
+              <h3 className="font-black text-gray-900 text-sm sm:text-base">
+                منظومة التثبيت الذكي • بدون الحاجة لمتجر تطبيقات
+              </h3>
+            </div>
+            <p className="text-xs text-gray-500 mb-4 max-w-lg mx-auto">
+              ثبت مراية كأيقونة مستقلة سريعة على هاتفك (أندرويد وآيفون) أو نزل نسخة سطح المكتب لأجهزة الكمبيوتر والاستقبال.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <a
+                href="/?install=mobile"
+                className="flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-xs py-3 px-3 rounded-2xl shadow-sm transition active:scale-95"
+              >
+                <span>📱 تثبيت ع الموبايل (PWA)</span>
+              </a>
+              <a
+                href="/api/desktop-installer"
+                className="flex items-center justify-center gap-2 bg-gray-900 hover:bg-black text-white font-extrabold text-xs py-3 px-3 rounded-2xl shadow-sm transition active:scale-95"
+              >
+                <span>💻 تثبيت للكمبيوتر (.bat)</span>
+              </a>
+              <a
+                href="/printable-card-3qr.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs py-3 px-3 rounded-2xl shadow-sm transition active:scale-95"
+              >
+                <span>🖨️ كارت المنظومة (3-QR)</span>
+              </a>
+            </div>
           </div>
 
           {/* ── STATS ROW ── */}

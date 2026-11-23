@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>كارت منظومة مراية الذكية | Meraya 3-QR Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 15px;
+      min-height: 100vh;
+    }
+    .print-actions {
+      margin-bottom: 25px;
+      display: flex;
+      gap: 15px;
+    }
+    .btn {
+      padding: 12px 28px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-print {
+      background: #0f766e;
+      color: white;
+    }
+    .btn-print:hover {
+      background: #115e59;
+      transform: translateY(-2px);
+    }
+    .btn-home {
+      background: white;
+      color: #0f766e;
+      border: 2px solid #0f766e;
+    }
+    .card-wrap {
+      width: 100%;
+      max-width: 1100px;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: 0 20px 45px rgba(15, 118, 110, 0.12);
+      border: 2px solid #fbbf24;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, #0f766e, #d97706, #14b8a6);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #f0fdfa;
+      border: 1.5px solid #ccfbf1;
+      padding: 10px 24px;
+      border-radius: 999px;
+      margin-bottom: 15px;
+    }
+    .logo-badge img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+    }
+    .logo-badge span {
+      font-weight: 900;
+      font-size: 24px;
+      color: #0f766e;
+    }
+    .header h1 {
+      font-size: 32px;
+      font-weight: 900;
+      color: #0f766e;
+      margin-bottom: 8px;
+    }
+    .header p {
+      font-size: 16px;
+      color: #b45309;
+      font-weight: 700;
+    }
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 35px;
+    }
+    @media (max-width: 860px) {
+      .qr-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .qr-box {
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 24px 18px;
+      text-align: center;
+      border: 2px solid #e2e8f0;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .qr-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.06);
+    }
+    .qr-box.teal { border-color: #99f6e4; background: #f0fdfa; }
+    .qr-box.gold { border-color: #fde68a; background: #fffbeb; }
+    .qr-box.cyan { border-color: #a5f3fc; background: #ecfeff; }
+    
+    .pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .pill.teal { background: #0f766e; color: white; }
+    .pill.gold { background: #d97706; color: white; }
+    .pill.cyan { background: #0284c7; color: white; }
+    
+    .qr-box h2 {
+      font-size: 19px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 14px;
+    }
+    .qr-img-wrap {
+      background: white;
+      padding: 12px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 16px;
+    }
+    .qr-img-wrap img {
+      display: block;
+      width: 170px;
+      height: 170px;
+    }
+    .qr-box p.desc {
+      font-size: 14px;
+      color: #475569;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .qr-box p.sub {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .scan-tip {
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .scan-tip.teal { color: #0f766e; }
+    .scan-tip.gold { color: #d97706; }
+    .scan-tip.cyan { color: #0284c7; }
+
+    .footer {
+      background: #0f766e;
+      color: white;
+      text-align: center;
+      padding: 18px 25px;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      box-shadow: 0 6px 20px rgba(15, 118, 110, 0.25);
+    }
+    .footer a {
+      color: #fef08a;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      .print-actions {
+        display: none !important;
+      }
+      .card-wrap {
+        box-shadow: none !important;
+        border: 1.5px solid #d97706 !important;
+        padding: 25px;
+      }
+      .qr-box {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-actions">
+    <button class="btn btn-print" onclick="window.print()">🖨️ طباعة الكارت / حفظ PDF</button>
+    <a class="btn btn-home" href="/">🏠 العودة للمنصة</a>
+  </div>
+
+  <div class="card-wrap">
+    <div class="header">
+      <div class="logo-badge">
+        <img src="/logo.png" alt="مراية" onerror="this.style.display='none'">
+        <span>مراية | Meraya</span>
+      </div>
+      <h1>منظومة حجز وإدارة صالونات الحلاقة والتجميل الذكية</h1>
+      <p>خدمة متكاملة للصالونات الرجالية والنسائية • تجربة صالون على أصابعك</p>
+    </div>
+
+    <div class="qr-grid">
+      <!-- QR 1 -->
+      <div class="qr-box teal">
+        <div class="pill teal">🌐 المنصة والموقع المباشر</div>
+        <h2>الموقع الرسمي للحجز</h2>
+        <div class="qr-img-wrap">
+          <img src="data:image/png;base64,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" alt="رابط الموقع">
+        </div>
+        <p class="desc">استعراض الصالونات والأسعار وحجز المواعيد الفورية</p>
+        <p class="sub">متوافق مع جميع الهواتف وأجهزة الكمبيوتر</p>
+        <div class="scan-tip teal">📷 وجّه الكاميرا للفتح المباشر</div>
+      </div>
+
+      <!-- QR 2 -->
+      <div class="qr-box gold">
+        <div class="pill gold">📱 تطبيق الموبايل (PWA)</div>
+        <h2>تثبيت تطبيق الهاتف</h2>
+        <div class="qr-img-wrap">
+          <img src="data:image/png;base64,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" alt="تثبيت التطبيق">
+        </div>
+        <p class="desc">تثبيت فوري كتطبيق كامل بدون الحاجة للمتجر</p>
+        <p class="sub">يدعم هواتف أندرويد وآيفون (شاشة كاملة وإشعارات)</p>
+        <div class="scan-tip gold">📲 امسح للتثبيت الفوري ع الموبايل</div>
+      </div>
+
+      <!-- QR 3 -->
+      <div class="qr-box cyan">
+        <div class="pill cyan">💻 نسخة الكمبيوتر (Desktop)</div>
+        <h2>تثبيت أيقونة سطح المكتب</h2>
+        <div class="qr-img-wrap">
+          <img src="data:image/png;base64,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" alt="تثبيت الديسكتوب">
+        </div>
+        <p class="desc">تحميل وتشغيل الأيقونة الفورية لسطح المكتب</p>
+        <p class="sub">يفتح بنقرة واحدة كنافذة مستقلة بدون تشويش</p>
+        <div class="scan-tip cyan">📥 امسح لتحميل مثبت الديسكتوب</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      تطوير شركة أوركا للحلول البرمجية (Orca Tech) 🐬 • <a href="tel:01018671000">01018671000</a>
+    </div>
+  </div>
+
+</body>
+</html>
